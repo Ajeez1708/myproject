@@ -1,0 +1,65 @@
+package kareclouds;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class methods 
+{
+
+	public static void main(String[] args) throws InterruptedException
+	{
+		ChromeDriver driver=new ChromeDriver();
+		driver.get("https://accounts.google.com/");
+		driver.manage().window().maximize();
+		WebElement username = driver.findElement(By.id("gmail"));		
+		username.sendKeys("reshmas.shaik4@gmail.com");		
+		WebElement pwd = driver.findElement(By.name("password"));
+		pwd.sendKeys("Ajeez@1708");
+		
+		WebElement signBtn = driver.findElement(By.className("btn"));
+			signBtn.click();
+		Thread.sleep(3000);
+		driver.navigate().back();
+		Thread.sleep(3000);
+		driver.navigate().forward();
+		Thread.sleep(3000);
+		driver.navigate().refresh();
+		Thread.sleep(3000);
+		driver.navigate().to("http://omayo.blogspot.com/");
+		
+		System.out.println(driver.getTitle());
+		   
+			Actions act=new Actions(driver);
+		    act.moveToElement(driver.findElement(By.id("blogsmenu")))
+		    .moveToElement(driver.findElement(By.xpath("//span[text()='Selenium143']"))).click().perform();
+			
+		    
+		    String ActualValue=driver.getTitle();
+			String ExpectedValue="Selenium143";
+			
+			if(ExpectedValue.equals(ActualValue)) {
+				System.out.println("navigated to particular page");
+			}
+			
+			driver.navigate().back();
+			Thread.sleep(3000);
+			System.out.println("Current Url is : "+driver.getCurrentUrl());
+		
+			System.out.println("page sources code :" +driver.getPageSource());
+			
+			System.out.println(driver.findElements(By.xpath("//input[@type='tet']")).size());
+			
+		List<WebElement>elements=driver.findElements(By.tagName("a"));
+		
+		for (int i = 0; i <elements.size(); i++) {
+			
+			System.out.println(elements.get(i).getText());
+		}
+		
+		}
+
+	} 
